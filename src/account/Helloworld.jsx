@@ -8,6 +8,11 @@ class helloworld extends Component {
             hello:''
         }
     }
+
+    componentDidMount=async(params)=>{
+        // const {data}=await addCommunity(params);
+
+    }
     helloworld=()=>{
         AccountService.helloworld().then(res=>{
             let helloword=res.data;
