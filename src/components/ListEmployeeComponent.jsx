@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { addCommunity } from '../lib/community';
 import EmployeeService from '../services/EmployeeService'
 
 class ListEmployeeComponent extends Component {
@@ -13,6 +14,13 @@ class ListEmployeeComponent extends Component {
         this.deleteEmployee = this.deleteEmployee.bind(this);
     }
 
+       
+    handleapi=async()=>{
+        let param={"title":'ttttt',"content":"wwww"};
+        const hel=await addCommunity(param);
+        console.log(hel);
+
+    }
     deleteEmployee(id){
         EmployeeService.deleteEmployee(id).then( res => {
             this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
@@ -26,6 +34,7 @@ class ListEmployeeComponent extends Component {
     }
 
     componentDidMount(){
+        this.handleapi();
         EmployeeService.getEmployees().then((res) => {
             this.setState({ employees: res.data});
         });

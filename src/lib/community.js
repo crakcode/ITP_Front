@@ -6,7 +6,7 @@ import axios from 'axios';
  * @returns {Promise<AxiosResponse<any>>}
  */
 export const getAccount = (accountId) =>{
-  return axios.get(`/api/v1/ciom/${accountId}`);
+  return axios.get(`http://localhost:8080/api/v1/ciom/${accountId}`);
 }
 
 /**
@@ -22,7 +22,7 @@ axios.get(`/api/v1/account/list`);
  * @param formData
  */
 export const addCommunity = (params) =>
-  axios.post(`/api/v1/community/`,params)
+  axios.post(`http://localhost:8080/api/v1/community`,params)
 
 /**
  * Update Account Information by accountId
