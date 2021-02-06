@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const ACCOUNT_API_BASE_URL="http://localhost:8080/api/v1/account";
+const ACCOUNT_API_BASE_URL="http://localhost:8080/api/v1/community";
 
 
 class AccountService{
@@ -9,9 +9,8 @@ class AccountService{
         return axios.post(ACCOUNT_API_BASE_URL+"/create",account);
     }
 
-    helloworld(){
-        return axios.get(ACCOUNT_API_BASE_URL+"/helloworld");
-
+    helloworld(params){
+        return axios.post(ACCOUNT_API_BASE_URL,params);
     }
 
 

@@ -1,41 +1,19 @@
 import axios from 'axios';
 
-/**
- * Get Account Information by accountId
- * @param accountId
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getAccount = (accountId) =>{
-  return axios.get(`http://localhost:8080/api/v1/ciom/${accountId}`);
+const COMMUNITY_API_BASE_URL = "http://localhost:8080/api/v1/community";
+
+
+export const getCommunitys = () =>{
+  return axios.get(COMMUNITY_API_BASE_URL+"/list");
 }
 
-/**
- * Get Account List
- * @param params
- * @returns {Promise<AxiosResponse<any>>}
- */
-export const getAccountList = () =>
-axios.get(`/api/v1/account/list`);
+export const createCommunity = (params) =>
+  axios.post(COMMUNITY_API_BASE_URL,params)
 
-/**
- * Create Account Information
- * @param formData
- */
-export const addCommunity = (params) =>
-  axios.post(`http://localhost:8080/api/v1/community`,params)
 
-/**
- * Update Account Information by accountId
- * @param formData
- */
-export const updateAccount = (formData) =>
-axios.put(`/api/v1/account/${formData.accountId}`, {
-    formData,
-  });
+export const getCommunityById = (params) =>
+  axios.get(COMMUNITY_API_BASE_URL+ '/' + params.bcode);
 
-/**
- * Delete Account Information by accountId
- * @param accountId
- */
+
 export const deleteAccount = (accountId) =>
-axios.delete(`/api/v1/account/${accountId}`);
+  axios.delete(`/api/v1/account/${accountId}`);

@@ -9,6 +9,8 @@ import UpdateEmployeeComponent from './components/UpdateEmployeeComponent';
 import ViewEmployeeComponent from './components/ViewEmployeeComponent';
 import helloworld from './account/Helloworld';
 import CreateAccount from './account/CreateAccount';
+import ListView from './components/pages/community/ListView';
+import ViewCommunity from './components/pages/community/ViewCommunity';
 // import ListView from './components/pages/community/ListView';
 // import Dashboard from './components/common/Layout';
 
@@ -25,7 +27,8 @@ function Routes() {
                           <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
                           <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route>
                           <Route path = "/helloworld" component = {helloworld}></Route>
-                          {/* <Route path = "/list" component = {ListView}></Route> */}
+                          <Route path = "/community/list" component = {ListView}></Route>
+                          <Route path = "/community/view/:id" component = {ViewCommunity}></Route>
                           <Route path = "/createaccount/:id" component = {CreateAccount}></Route>
                     </Switch>
                 </div>

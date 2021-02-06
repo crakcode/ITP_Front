@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { addCommunity } from '../lib/community';
+import { addCommunity, createCommunity, getCommunitys } from '../lib/community';
 import EmployeeService from '../services/EmployeeService'
 
 class ListEmployeeComponent extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
                 employees: []
         }
@@ -15,16 +14,28 @@ class ListEmployeeComponent extends Component {
     }
 
        
-    handleapi=async()=>{
-        let param={"title":'ttttt',"content":"wwww"};
-        const hel=await addCommunity(param);
-        console.log(hel);
+    handleapi=async ()=>{
+        let param={bCode:10,title:'ttttt',content:"wwww",date:new Date()};
+        let data=await createCommunity(param);
+        console.log(data);
 
+        let data2=await getCommunitys();
+        console.log(data2);
+        // console.log(param);
+
+        // let param2={firstName:'ttttt',lastName:"wwww"};
+        // EmployeeService.createEmployee(param2).then (res=> {
+        //     console.log("sucess");
+        // });
+
+        // AccountService.helloworld(param).then (res=> {
+        //     console.log("sucess");
+        // });
     }
     deleteEmployee(id){
         EmployeeService.deleteEmployee(id).then( res => {
             this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
-        });
+        }); 
     }
     viewEmployee(id){
         this.props.history.push(`/view-employee/${id}`);
