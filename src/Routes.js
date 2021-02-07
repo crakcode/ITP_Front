@@ -11,6 +11,9 @@ import helloworld from './account/Helloworld';
 import CreateAccount from './account/CreateAccount';
 import ListView from './components/pages/community/ListView';
 import ViewCommunity from './components/pages/community/ViewCommunity';
+import Dashboard from './components/pages/dashboard/Dashboard';
+import Login from './components/pages/login/Login';
+import Signup from './components/pages/user/Singup';
 // import ListView from './components/pages/community/ListView';
 // import Dashboard from './components/common/Layout';
 
@@ -21,7 +24,8 @@ function Routes() {
               <HeaderComponent />
                 <div className="container">
                     <Switch> 
-                          {/* <Route path = "/" exact component = {Dashboard}></Route> */}
+                          <Route path = "/" exact component = {Login}></Route>
+                          <Route path = "/signup" exact component = {Signup}></Route>
                           <Route path = "/employees" component = {ListEmployeeComponent}></Route>
                           <Route path = "/add-employee/:id" component = {CreateEmployeeComponent}></Route>
                           <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
@@ -32,7 +36,6 @@ function Routes() {
                           <Route path = "/createaccount/:id" component = {CreateAccount}></Route>
                     </Switch>
                 </div>
-              <FooterComponent />
         </Router>
     </div>
     

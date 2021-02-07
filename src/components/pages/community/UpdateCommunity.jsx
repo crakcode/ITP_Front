@@ -1,10 +1,7 @@
 import { Paper, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
-import {  deleteCommunity, getCommunityById } from '../../../lib/community';
+import {  getCommunityById } from '../../../lib/community';
 import React from 'react';
 import Button from '@material-ui/core/Button';
-// import SimpleModal from './SimpleModal';
-import UpdateModal from './UpdateModal';
-import { withRouter } from 'react-router-dom';
 
 class ListView extends React.Component{
     constructor(props) {
@@ -26,16 +23,9 @@ class ListView extends React.Component{
         this.setState({coummunity:data})
 
     }
-    handleDelete=async()=>{
-        const {id} =this.state;
-        let params={bcode:id}
-        await deleteCommunity(params);
-        this.props.history.push(`/community/list`);
-
-    }
-
+    
     render(){
-        const{id}=this.state;
+        
         return(
             <Paper>
                 제목<br/>
@@ -48,8 +38,18 @@ class ListView extends React.Component{
                 {this.state.coummunity.date}
                 <br/><br/><br/>
                 
-                <UpdateModal id={id}/>
-                  <br/>
+                <Button
+                margin="normal"
+                fullWidth
+                required
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  this.handleLogin();
+                }}
+              >
+                  글수정하기
+                  </Button>                  <br/>
                   <br/>
 
                   <Button
@@ -59,12 +59,12 @@ class ListView extends React.Component{
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.handleDelete();
+                  this.handleLogin();
                 }}
               >
                   글삭제하기
                   </Button>
-                {/* <SimpleModal/> */}
+
             </Paper>
         )
     }
@@ -76,4 +76,4 @@ class ListView extends React.Component{
 }
 
 
-export default withRouter (ListView);
+export default ListView;
