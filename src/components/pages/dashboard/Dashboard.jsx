@@ -1,48 +1,80 @@
-import { Paper, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
+import { TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import { addCommunity, getCommunityById, getCommunitys } from '../../../lib/community';
-import React, { Component } from 'react';
-const API = "https://jsonplaceholder.typicode.com/users";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import { getPostList } from '../../../lib/post';
 
-class Dashboard extends Component {
-  state = {
-    monsters: [],
-    monstersData: [],
-    userInput: "",
-  };
+class ListView extends React.Component{
+    constructor(props) {
+        super(props)
+        this.state = {
+            posts: [],
+            title: '22',
+            content: '222',
+        }
+    }
+    componentDidMount(){
+        this.handleList();
+    }
 
-  componentDidMount = () => {
-    fetch(API, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        this.setState({ monsters: result, monstersData: result });
-      });
-  };
+    handleChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+      };
+    
+    handle=async(row)=>{
+        console.log(row);
+        let {data}=await getCommunityById(row);
+        console.log(data);
+        console.log("helloworld");
+    }  
+    handleView=async(row)=>{
+        let id=row.id;
+        console.log(id);
+        this.props.history.push(`/dashboard/${id}`);
+    }  
 
-  searchUser = (e) => {
-    this.setState({ userInput: e.target.value });
-  };
+    handleList=async()=>{
+        let {data}=await getPostList();
+        this.setState({posts: data});
+        console.log(data);
 
-  filterUser = () => {
-    const filterMonsters = this.state.monstersData.filter((monster) => {
-      return monster.name.toLowerCase().includes(this.state.userInput);
-    });
-    this.setState({ monsters: filterMonsters });
-  };
+    }
+    render(){
+        
+        return(
+            <div>
+                  <Button
+                margin="normal"
+                fullWidth
+                required
+                label="hellworld"
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  this.handleDelete();
+                }}
+              >
+                새로 등록하기
+              </Button>
+        <TableBody>
+          {this.state.posts.map((row) => (
+            <TableRow key={row.id} onClick={()=>this.handleView(row)}>
+            <TableCell component="th" scope="row">{row.id}</TableCell>
+              <TableCell align="right">{row.title}</TableCell>
+              <TableCell align="right">{row.content}</TableCell>
+              <TableCell align="right">{row.writer}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
 
-  render() {
-    return (
-      <div className="Monsters">
-        <h1>컴포넌트 재사용 연습!</h1>
-        {/* <SearchBox
-          handleChange={this.searchUser}
-          handleFilter={this.filterUser}
-        />
-        <CardList monsters={this.state.monsters} /> */}
-      </div>
-    );
-  }
+            </div>
+
+        )
+    }
+
 }
 
-export default Dashboard;
+
+export default ListView;
