@@ -8,7 +8,7 @@ import { getPostById } from '../../../lib/post';
 import { getUserById } from '../../../lib/user';
 import { createComment,getComments} from '../../../lib/comment';
 
-class DashboardView extends React.Component{
+class PostBoardView extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -128,4 +128,4 @@ class DashboardView extends React.Component{
 }
 
 
-export default withRouter (DashboardView);
+export default withRouter (PostBoardView);

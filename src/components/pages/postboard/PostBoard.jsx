@@ -4,7 +4,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { getPostList } from '../../../lib/post';
 
-class ListView extends React.Component{
+class PostBoard extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -32,7 +32,7 @@ class ListView extends React.Component{
     handleView=async(row)=>{
         let id=row.id;
         console.log(id);
-        this.props.history.push(`/dashboard/${id}`);
+        this.props.history.push(`/post/${id}`);
     }  
 
     handleList=async()=>{
@@ -77,4 +77,4 @@ class ListView extends React.Component{
 }
 
 
-export default ListView;
+export default PostBoard;
