@@ -2,25 +2,24 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import ListEmployeeComponent from './components/ListEmployeeComponent';
-import HeaderComponent from './components/HeaderComponent';
 import CreateEmployeeComponent from './components/CreateEmployeeComponent';
 import UpdateEmployeeComponent from './components/UpdateEmployeeComponent';
 import ViewEmployeeComponent from './components/ViewEmployeeComponent';
 import helloworld from './account/Helloworld';
 import CreateAccount from './account/CreateAccount';
-import ListView from './components/pages/community/ListView';
-import ViewCommunity from './components/pages/community/ViewCommunity';
-import Dashboard from './components/pages/postboard/PostBoard';
 import Login from './components/pages/login/Login';
 import Signup from './components/pages/user/Singup';
-import CompanyView from './components/pages/company/CompanyView';
-import DashboardView from './components/pages/postboard/PostBoardView';
+import CompanyView from './components/pages/company/CompanyList';
 import Appshell from './components/common/Appshell';
 import PostBoard from './components/pages/postboard/PostBoard';
 import PostBoardView from './components/pages/postboard/PostBoardView';
-// import Layout from './components/common/Layout';
-// import ListView from './components/pages/community/ListView';
-// import Dashboard from './components/common/Layout';
+import CommunityList from './components/pages/community/CommunityList';
+import CommunityView from './components/pages/community/CommunityView';
+import CompanyList from './components/pages/company/CompanyList';
+import FlavorForm from './components/pages/company/CompanySearch';
+import Paging from './components/pages/company/Paging';
+import NewPaging from './components/pages/company/NewPaging';
+import CompanySearch from './components/pages/company/CompanySearch';
 
 function Routes() {
   return (
@@ -32,7 +31,6 @@ function Routes() {
                     <Switch> 
                           <Route path = "/" exact component = {Login}></Route>
                           <Route path = "/signup" exact component = {Signup}></Route>
-                          {/* <HeaderComponent /> */}
                           <Route path = "/post" exact component = {PostBoard}></Route>
                           <Route path = "/post/:id" exact component = {PostBoardView}></Route>
                           <Route path = "/employees" component = {ListEmployeeComponent}></Route>
@@ -40,10 +38,13 @@ function Routes() {
                           <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
                           <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route>
                           <Route path = "/helloworld" component = {helloworld}></Route>
-                          <Route path = "/community" component = {ListView}></Route>
-                          <Route path = "/community/view/:id" component = {ViewCommunity}></Route>
+                          <Route path = "/community" component = {CommunityList}></Route>
+                          <Route path = "/community/:id" component = {CommunityView}></Route>
                           <Route path = "/createaccount/:id" component = {CreateAccount}></Route>
-                          <Route path = "/company" component = {CompanyView}></Route>\
+                          <Route path = "/company" component = {CompanyList}></Route>
+                          <Route path = "/companysearch" component = {CompanySearch}></Route>
+                          <Route path = "/paging" component = {Paging}></Route>
+                          <Route path = "/newpaging" component = {NewPaging}></Route>
                     </Switch>
                 </div>
 

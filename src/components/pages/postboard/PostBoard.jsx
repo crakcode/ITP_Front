@@ -22,7 +22,7 @@ class PostBoard extends React.Component{
           [e.target.name]: e.target.value,
         });
       };
-    
+     
     handle=async(row)=>{
         console.log(row);
         let {data}=await getCommunityById(row);
@@ -44,10 +44,13 @@ class PostBoard extends React.Component{
     render(){
         
         return(
+
             <div>
+                        <br/>
+          <br/>
+          <br/>
                   <Button
                 margin="normal"
-                fullWidth
                 required
                 label="hellworld"
                 variant="contained"

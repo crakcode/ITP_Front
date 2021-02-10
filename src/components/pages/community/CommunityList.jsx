@@ -2,7 +2,7 @@ import { TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import { addCommunity, getCommunityById, getCommunitys } from '../../../lib/community';
 import React from 'react';
 
-class ListView extends React.Component{
+class CommunityList extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
@@ -27,10 +27,11 @@ class ListView extends React.Component{
         console.log(data);
         console.log("helloworld");
     }  
-    handleView=async(row)=>{
+    handleView=(row)=>{
         let id=row.bcode;
         console.log(id);
-        this.props.history.push(`/community/view/${id}`);
+        console.log("go view");
+        this.props.history.push(`/community/${id}`);
     }  
 
     handleList=async()=>{
@@ -41,7 +42,6 @@ class ListView extends React.Component{
     render(){
         
         return(
-            <div>
         <TableBody>
           {this.state.coummunitys.map((row) => (
             <TableRow key={row.bcode} onClick={()=>this.handleView(row)}>
@@ -56,12 +56,8 @@ class ListView extends React.Component{
             </TableRow>
           ))}
         </TableBody>
-
-            </div>
-
         )
     }
-
 
 
 
@@ -69,4 +65,4 @@ class ListView extends React.Component{
 }
 
 
-export default ListView;
+export default CommunityList;
