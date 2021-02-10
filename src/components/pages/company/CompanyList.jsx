@@ -26,7 +26,7 @@ class CompanyList extends React.Component{
     goSearchPage=()=>{
         console.log("hell;owrold");
         const search=0;
-        this.props.history.push(`/company/${search}`);
+        this.props.history.push(`/companysearch`);
     }
     handleList=async()=>{
       let {data}=await getCompanyList();

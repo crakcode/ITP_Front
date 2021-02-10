@@ -3,6 +3,7 @@ import { addCommunity, getCommunityById, getCommunitys } from '../../../lib/comm
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { getPostList } from '../../../lib/post';
+import CreatPostModal from './CreatPostModal';
 
 class PostBoard extends React.Component{
     constructor(props) {
@@ -41,33 +42,25 @@ class PostBoard extends React.Component{
         console.log(data);
 
     }
+
+
     render(){
         
         return(
 
-            <div>
-                        <br/>
+          <div>
           <br/>
           <br/>
-                  <Button
-                margin="normal"
-                required
-                label="hellworld"
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  this.handleDelete();
-                }}
-              >
-                새로 등록하기
-              </Button>
+          <br/>
+          <CreatPostModal/>
         <TableBody>
           {this.state.posts.map((row) => (
             <TableRow key={row.id} onClick={()=>this.handleView(row)}>
             <TableCell component="th" scope="row">{row.id}</TableCell>
-              <TableCell align="right">{row.title}</TableCell>
-              <TableCell align="right">{row.content}</TableCell>
-              <TableCell align="right">{row.writer}</TableCell>
+              <TableCell align="left">{row.title}</TableCell>
+              <TableCell align="left">{row.content}</TableCell>
+              <TableCell align="left">{row.writer}</TableCell>
+              <TableCell align="left">{row.createAt}</TableCell>
             </TableRow>
           ))}
         </TableBody>

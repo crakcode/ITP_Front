@@ -70,7 +70,7 @@ class PostBoardView extends React.Component{
                 {this.state.coummunity.content}
                 <br/><br/><br/>
                 이름<br/>
-                {this.state.coummunity.date}
+                {this.state.coummunity.writer}
                 <br/><br/><br/>
 
                   <Button

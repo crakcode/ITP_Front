@@ -25,13 +25,14 @@ class CompanySearch extends React.Component {
       console.log(condition);
       if (condition=='location'){
         const {data}= await getCompanyByLocation(keyword);
+        console.log(data.length);
         this.setState({companys: data});
         console.log(this.state.companys);
 
 
       }else{
         const {data}= await getCompanyByName(keyword);
-        this.setState({companys: data});
+        this.setState({companys: data}); 
         console.log(this.state.companys);
       }
 
@@ -51,7 +52,6 @@ class CompanySearch extends React.Component {
         <br/>
         <form onSubmit={this.handleSubmit}>
           <label>
-            Pick your favorite flavor:
             <select value={this.state.condition} onChange={this.handleCondition}>
               <option value="location">지역</option>
               <option value="name">상호명</option>
@@ -59,7 +59,6 @@ class CompanySearch extends React.Component {
             <TextField
                 variant="standard"
                 margin="normal"
-                fullWidth
                 required
                 name="text"
                 onChange={this.handleKeyword}
@@ -68,7 +67,6 @@ class CompanySearch extends React.Component {
           </label>
           <Button
                 margin="normal"
-                fullWidth
                 required
                 variant="contained"
                 color="primary"

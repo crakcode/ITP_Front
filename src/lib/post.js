@@ -8,8 +8,8 @@ export const getPostList = () =>{
 }
 
 //Request Body 및 ucode 필요
-export const CreatePost = (ucode) =>{
-  return axios.post(POST_API_BASE_URL+'/'+ucode)
+export const CreatePost = (ucode,params) =>{
+  return axios.post(POST_API_BASE_URL+'/'+ucode,params)
 }
 
 export const getPostById = (id) =>
