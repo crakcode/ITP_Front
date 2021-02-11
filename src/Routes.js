@@ -9,7 +9,7 @@ import helloworld from './account/Helloworld';
 import CreateAccount from './account/CreateAccount';
 import Login from './components/pages/login/Login';
 import Signup from './components/pages/user/Singup';
-import CompanyView from './components/pages/company/CompanyList';
+import CompanyView from './components/pages/company/CompanyView';
 import Appshell from './components/common/Appshell';
 import PostBoard from './components/pages/postboard/PostBoard';
 import PostBoardView from './components/pages/postboard/PostBoardView';
@@ -18,8 +18,9 @@ import CommunityView from './components/pages/community/CommunityView';
 import CompanyList from './components/pages/company/CompanyList';
 import FlavorForm from './components/pages/company/CompanySearch';
 import Paging from './components/pages/company/Paging';
-import NewPaging from './components/pages/company/NewPaging';
+import CompanySearchList from './components/pages/company/CompanySearchList';
 import CompanySearch from './components/pages/company/CompanySearch';
+import Dashboard from './components/pages/dashboard/Dashboard';
 
 function Routes() {
   return (
@@ -31,6 +32,7 @@ function Routes() {
                     <Switch> 
                           <Route path = "/" exact component = {Login}></Route>
                           <Route path = "/signup" exact component = {Signup}></Route>
+                          <Route path = "/dashboard" exact component = {Dashboard}></Route>
                           <Route path = "/post" exact component = {PostBoard}></Route>
                           <Route path = "/post/:id" exact component = {PostBoardView}></Route>
                           <Route path = "/employees" component = {ListEmployeeComponent}></Route>
@@ -41,10 +43,12 @@ function Routes() {
                           <Route path = "/community" component = {CommunityList}></Route>
                           <Route path = "/community/:id" component = {CommunityView}></Route>
                           <Route path = "/createaccount/:id" component = {CreateAccount}></Route>
-                          <Route path = "/company" component = {CompanyList}></Route>
+                          <Route path = "/company" exact component = {CompanySearchList}></Route>
+                          <Route path = "/company/:id" exact component = {CompanyView}></Route>
                           <Route path = "/companysearch" component = {CompanySearch}></Route>
                           <Route path = "/paging" component = {Paging}></Route>
-                          <Route path = "/newpaging" component = {NewPaging}></Route>
+                          {/* <Route path = "/newpaging" component = {NewPaging}></Route>
+                          <Route path = "/mypage" component = {NewPaging}></Route> */}
                     </Switch>
                 </div>
 

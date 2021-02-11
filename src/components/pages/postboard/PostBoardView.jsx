@@ -14,7 +14,7 @@ class PostBoardView extends React.Component{
         this.state = {
             id: this.props.match.params.id,
             content:'',
-            coummunity: {},
+            post: {},
             comments:[]
         }
     }
@@ -27,7 +27,7 @@ class PostBoardView extends React.Component{
         let {data}=await getPostById(id);
         console.log("hellowrold");
         console.log("데이터입니다",data);
-        this.setState({coummunity:data})
+        this.setState({post:data})
 
         let hel=await getUserById('1');
         console.log("회원정보",hel);
@@ -62,15 +62,21 @@ class PostBoardView extends React.Component{
     render(){
         const{id}=this.state;
         return(
+
+    <div>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
             <Paper>
                 제목<br/>
-                {this.state.coummunity.title}
+                {this.state.post.title}
                 <br/><br/><br/>
                 내용<br/>
-                {this.state.coummunity.content}
+                {this.state.post.content}
                 <br/><br/><br/>
                 이름<br/>
-                {this.state.coummunity.writer}
+                {this.state.post.writer}
                 <br/><br/><br/>
 
                   <Button
@@ -117,7 +123,7 @@ class PostBoardView extends React.Component{
           ))}
             </TableBody>
             </Paper>
-
+</div>
         )
     }
 

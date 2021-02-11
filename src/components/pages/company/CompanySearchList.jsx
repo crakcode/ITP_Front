@@ -4,8 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { getCompanyByLocation, getCompanyByName, getCompanyList } from '../../../lib/company';
 import { Button, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import "./styles.css";
-
-export default class NewPaging extends Component {
+ class CompanySearchList extends Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -17,12 +16,22 @@ export default class NewPaging extends Component {
           companys:[],
       };
   }
+
+
+  handleView=(e)=>{
+    console.log(e);
+    console.log(e.companyId);
+    let id=e.companyName;
+    this.props.history.push(`/company/${id}`);
+
+  }
   handleCondition=(e)=> {
     this.setState({condition: e.target.value});
   }
   handleKeyword=(e)=>{
     this.setState({keyword: e.target.value});
   }
+
   dosearch=async(e)=> {
     const {condition,keyword}=this.state;
     console.log(condition);
@@ -44,12 +53,27 @@ export default class NewPaging extends Component {
         companyData
     })
 
-
     }else{
       const {data}= await getCompanyByName(keyword);
-      this.setState({companys: data});
-      console.log(this.state.companys);
-    }
+      const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
+      const companyData = slice.map(row =>
+        <TableBody>
+        <TableRow key={row.companyId} onClick={()=>this.handleView(row)}>
+            <TableCell component="th" scope="row">{row.companyId}</TableCell>
+            <TableCell component="th" scope="row">{row.companyName}</TableCell>
+            <TableCell align="right">{row.companyLocation}</TableCell>
+            <TableCell align="right">{row.companyTel}</TableCell>
+        </TableRow>
+        </TableBody>
+    )
+    this.setState({
+        pageCount: Math.ceil(data.length / this.state.perPage),
+        companyData
+    })
+
+  }
+
+
 
   }
   handleList=async()=>{
@@ -73,10 +97,6 @@ export default class NewPaging extends Component {
     })
 
 }
-    handleView=(e)=>{
-        console.log(e)
-    }
-
   handlePageClick = (e) => {
     const selectedPage = e.selected;
     const offset = selectedPage * this.state.perPage;
@@ -99,7 +119,7 @@ export default class NewPaging extends Component {
               <br/>
               <form onSubmit={this.handleSubmit}>
           <label>
-            Pick your favorite flavor:
+            검색조건
             <select value={this.state.condition} onChange={this.handleCondition}>
               <option value="location">지역</option>
               <option value="name">상호명</option>
@@ -107,7 +127,6 @@ export default class NewPaging extends Component {
             <TextField
                 variant="standard"
                 margin="normal"
-                fullWidth
                 required
                 name="text"
                 onChange={this.handleKeyword}
@@ -116,7 +135,6 @@ export default class NewPaging extends Component {
           </label>
           <Button
                 margin="normal"
-                fullWidth
                 required
                 variant="contained"
                 color="primary"
@@ -148,3 +166,5 @@ export default class NewPaging extends Component {
       )
   }
 }
+
+export default CompanySearchList;

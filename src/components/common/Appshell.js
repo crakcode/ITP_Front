@@ -50,7 +50,7 @@ class Appshell extends React.Component {
                 </AppBar>
                 <Drawer open={this.state.toggle} anchor="left" variant="permanent" className={classes.drawer}>
                 <MenuItem onClick={this.handleDrawerToggle}>
-                    <Link component={RouterLink} to="/employees">
+                    <Link component={RouterLink} to="/dashboard">
                         Dashboard
                     </Link>
                 </MenuItem>
@@ -69,6 +69,12 @@ class Appshell extends React.Component {
                         Company
                     </Link>
                 </MenuItem>
+                <MenuItem onClick={this.handleDrawerToggle}>
+                    <Link component={RouterLink} to="/mypage">
+                        MyPage
+                    </Link>
+                </MenuItem>
+
                 </Drawer>
                 {/* </Router> */}
             </div>
