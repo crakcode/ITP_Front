@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink, Router } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const styles = {
     root: {
@@ -49,6 +49,11 @@ class Appshell extends React.Component {
                     </IconButton> 
                 </AppBar>
                 <Drawer open={this.state.toggle} anchor="left" variant="permanent" className={classes.drawer}>
+                <CssBaseline/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <MenuItem onClick={this.handleDrawerToggle}>
                     <Link component={RouterLink} to="/dashboard">
                         Dashboard

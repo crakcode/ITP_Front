@@ -26,7 +26,7 @@ class CreatPostModal extends React.Component {
         title: '',
         content: '',
         createAt: new Date(),
-        ucode:'1',
+        ucode:'2',
         open: false
 }
     // this.handleFormSubmit = this.handleFormSubmit.bind(this)

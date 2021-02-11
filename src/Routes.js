@@ -21,6 +21,7 @@ import Paging from './components/pages/company/Paging';
 import CompanySearchList from './components/pages/company/CompanySearchList';
 import CompanySearch from './components/pages/company/CompanySearch';
 import Dashboard from './components/pages/dashboard/Dashboard';
+import MyList from './components/pages/mypage/MyList';
 
 function Routes() {
   return (
@@ -47,8 +48,8 @@ function Routes() {
                           <Route path = "/company/:id" exact component = {CompanyView}></Route>
                           <Route path = "/companysearch" component = {CompanySearch}></Route>
                           <Route path = "/paging" component = {Paging}></Route>
-                          {/* <Route path = "/newpaging" component = {NewPaging}></Route>
-                          <Route path = "/mypage" component = {NewPaging}></Route> */}
+                          {/* <Route path = "/newpaging" component = {NewPaging}></Route> */}
+                          <Route path = "/mypage" component = {MyList}></Route> 
                     </Switch>
                 </div>
 

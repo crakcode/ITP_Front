@@ -15,6 +15,9 @@ export const CreatePost = (ucode,params) =>{
 export const getPostById = (id) =>
   axios.get(POST_API_BASE_URL+ '/' + id);
 
+export const getPostByUserId = (id) =>
+  axios.get(POST_API_BASE_URL+'/writer/'+ id);
+
 export const updatePost = (id) =>
   axios.put(POST_API_BASE_URL+'/'+ id);
 
