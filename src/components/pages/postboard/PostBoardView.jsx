@@ -51,6 +51,7 @@ class PostBoardView extends React.Component{
     handleComment=async()=>{
       const {id} =this.state;
       let params={"content":this.state.content};
+      console.log(id);
       await createComment(id,1,params);
       window.location.reload();
   }

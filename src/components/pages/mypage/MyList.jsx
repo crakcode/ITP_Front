@@ -1,7 +1,7 @@
 import { Button, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import { addCommunity, getCommunityById, getCommunitys } from '../../../lib/community';
 import React from 'react';
-import {getCompanyByLocation, getCompanyCount} from '../../../lib/company';
+import {deleteMyCompany, getCompanyByLocation, getCompanyCount} from '../../../lib/company';
 import ReactPaginate from 'react-paginate';
 import { getPostByUserId } from '../../../lib/post';
 import { getMyCompanyList } from '../../../lib/user';
@@ -20,9 +20,9 @@ class MyList extends React.Component{
     goPostView=(row)=>{
         this.props.history.push(`/post/${row.id}`);
     }
-    goCompanyView=(row)=>{
-        console.log(row);
-        this.props.history.push(`/company/${row}`);
+    goCompanyView=(company)=>{
+        console.log(company);
+        this.props.history.push(`/company/${company.companyName}`);
     }
     componentDidMount() {
         this.getPostByUcode();
@@ -43,6 +43,10 @@ class MyList extends React.Component{
     handleClick=(e)=>{
         this.setState({keyword:e.value});
         this.handleCompanyList(this.state.keyword)
+    }
+    deleteCompany=async(company)=>{
+        await deleteMyCompany(1,company.companyId);
+        window.location.reload();
     }
 
     render() {
@@ -67,9 +71,10 @@ class MyList extends React.Component{
         </TableBody>
             내가 찜한 회사
             {this.state.companys.map((row) => (
-            <TableRow key={row} onClick={()=>this.goCompanyView(row)}>
-            <TableCell component="th" scope="row">{row}</TableCell>
-              <TableCell align="right">{row.createAt}</TableCell>
+            <TableRow key={row.companyId} >
+            <TableCell component="th" scope="row" >{row.companyId}</TableCell>
+            <TableCell component="th" scope="row"  onClick={()=>this.goCompanyView(row)}>{row.companyName}</TableCell>
+            <TableCell component="th" scope="row" onClick={()=>this.deleteCompany(row)}>삭제하기</TableCell>
             </TableRow>
           ))}
 

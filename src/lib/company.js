@@ -21,6 +21,8 @@ export const getCompanyByName = (name) =>
   axios.get(COMPANY_API_BASE_URL+'/name/' + name);
 
 
+export const deleteMyCompany = (ucode,companyId) =>
+  axios.delete(COMPANY_API_BASE_URL + '/' +ucode+'/'+companyId);
 
 
 export const updateCommunity = (params) =>
