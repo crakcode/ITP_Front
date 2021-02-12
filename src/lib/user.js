@@ -10,10 +10,15 @@ export const getUsers = () =>{
 export const createUser = (params) =>
   axios.post(USER_API_BASE_URL,params)
 
+export const createMyCompanyList = (ucode,name) =>
+  axios.post(USER_API_BASE_URL+'/'+ucode+'/'+name)
+
 
 export const getUserById = (ucode) =>
   axios.post(USER_API_BASE_URL+ '/' + ucode);
 
+export const getMyCompanyList = (ucode) =>
+  axios.get(USER_API_BASE_URL+ '/company/' + ucode);
 
 export const deleteUser = (params) =>
   axios.delete(USER_API_BASE_URL+ '/' + params.email);

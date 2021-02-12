@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 // import SimpleModal from './SimpleModal';
 import { withRouter } from 'react-router-dom';
 import { getCompanyByName } from '../../../lib/company';
+import { createMyCompanyList } from '../../../lib/user';
 
 class CompanyView extends React.Component{
     constructor(props) {
@@ -27,6 +28,14 @@ class CompanyView extends React.Component{
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
     };
+
+    addCompany=async()=>{
+        let name=this.state.id
+        const ucode=1
+        await createMyCompanyList(ucode,name);
+
+    }
+    
 
     render(){
         return(
@@ -51,15 +60,14 @@ class CompanyView extends React.Component{
 
                   <Button
                 margin="normal"
-                fullWidth
                 required
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  this.handleDelete();
+                  this.addCompany();
                 }}
               >
-                  글삭제하기
+                  회사 추가하기
                   </Button>
 
             </Paper>

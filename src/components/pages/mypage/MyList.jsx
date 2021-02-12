@@ -4,6 +4,7 @@ import React from 'react';
 import {getCompanyByLocation, getCompanyCount} from '../../../lib/company';
 import ReactPaginate from 'react-paginate';
 import { getPostByUserId } from '../../../lib/post';
+import { getMyCompanyList } from '../../../lib/user';
 
 class MyList extends React.Component{
     constructor(props) {
@@ -13,19 +14,30 @@ class MyList extends React.Component{
             count:[],
             keyword:'',
             post:[],
+            companys:[]
         };
     }
     goPostView=(row)=>{
         this.props.history.push(`/post/${row.id}`);
     }
-
+    goCompanyView=(row)=>{
+        console.log(row);
+        this.props.history.push(`/company/${row}`);
+    }
     componentDidMount() {
         this.getPostByUcode();
+        this.getComapnyByUcode();
     }
 
     getPostByUcode=async()=>{
         let {data} = await getPostByUserId(1);
         this.setState({post:data.slice(0,4)});
+    }
+
+    getComapnyByUcode=async()=>{
+        let {data} = await getMyCompanyList(1);
+        console.log(data);
+        this.setState({companys:data});
     }
 
     handleClick=(e)=>{
@@ -54,7 +66,13 @@ class MyList extends React.Component{
           ))}
         </TableBody>
             내가 찜한 회사
-            
+            {this.state.companys.map((row) => (
+            <TableRow key={row} onClick={()=>this.goCompanyView(row)}>
+            <TableCell component="th" scope="row">{row}</TableCell>
+              <TableCell align="right">{row.createAt}</TableCell>
+            </TableRow>
+          ))}
+
             
             </div>
 

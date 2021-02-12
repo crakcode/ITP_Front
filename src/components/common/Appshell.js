@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink, Router } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
-const drawerWidth = 300;
+const drawerWidth = 240;
 
 const styles = {
     root: {

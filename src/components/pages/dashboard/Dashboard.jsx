@@ -1,11 +1,25 @@
-import { Button, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
+import { Button, Paper, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import { addCommunity, getCommunityById, getCommunitys } from '../../../lib/community';
 import React from 'react';
 import {getCompanyByLocation, getCompanyCount} from '../../../lib/company';
 import ReactPaginate from 'react-paginate';
 import LineCha from './LineChart';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = {
+  root: {
+      display: 'flex',
+    },
+      menuButton: {
+    marginRight: 'auto'
+  },
+  paper: {
+      width: `750px`,
+    },  
+  
+  
+};
 class Dashboard extends React.Component{
     constructor(props) {
         super(props);
@@ -48,7 +62,8 @@ class Dashboard extends React.Component{
     }
   
     render() {
-        const {count}=this.state;
+      const { classes } = this.props;
+      const {count}=this.state;
         const data = [
             {
               "name": "서울",
@@ -74,6 +89,8 @@ class Dashboard extends React.Component{
         
         return (
             <div>
+              <Paper className={classes.paper}> 
+                <br/>
                 <br/>
                 <br/>
                 <br/>
@@ -100,7 +117,7 @@ class Dashboard extends React.Component{
             </TableRow>
           ))}
         </TableBody>
-
+        </Paper>
             
             </div>
 
@@ -108,4 +125,4 @@ class Dashboard extends React.Component{
         )
       }
 }
-export default Dashboard;
+export default withStyles(styles)(Dashboard);
