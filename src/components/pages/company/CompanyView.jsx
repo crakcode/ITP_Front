@@ -57,6 +57,10 @@ class CompanyView extends React.Component{
                 회사 전화번호<br/>
                 {this.state.company.companyTel}
                 <br/><br/><br/>
+                회사정보: 워드클라우드<br/>
+
+                평점:
+                <br/><br/><br/>
 
                   <Button
                 margin="normal"

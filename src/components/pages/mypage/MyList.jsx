@@ -74,7 +74,7 @@ class MyList extends React.Component{
             <TableRow key={row.companyId} >
             <TableCell component="th" scope="row" >{row.companyId}</TableCell>
             <TableCell component="th" scope="row"  onClick={()=>this.goCompanyView(row)}>{row.companyName}</TableCell>
-            <TableCell component="th" scope="row" onClick={()=>this.deleteCompany(row)}>삭제하기</TableCell>
+            <Button component="th" color="secondary" className="btn btn-danger" scope="row" onClick={()=>this.deleteCompany(row)}>삭제하기</Button>
             </TableRow>
           ))}
 

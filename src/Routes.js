@@ -23,13 +23,13 @@ import CompanySearch from './components/pages/company/CompanySearch';
 import Dashboard from './components/pages/dashboard/Dashboard';
 import MyList from './components/pages/mypage/MyList';
 import Navigation from './components/pages/mypage/Navigation';
+import Page from './components/pages/company/Page';
 
 function Routes() {
   return (
     <div>
         <Router>
           <Appshell/>
-
                 <div className="container">
                     <Switch> 
                           <Route path = "/" exact component = {Login}></Route>
@@ -51,6 +51,7 @@ function Routes() {
                           <Route path = "/paging" component = {Paging}></Route>
                           {/* <Route path = "/newpaging" component = {NewPaging}></Route> */}
                           <Route path = "/mypage" component = {MyList}></Route> 
+                          {/* <Route path = "/page" component = {Page}></Route>  */}
                           {/* <Route path = "/navigation" component = {Navigation}></Route>  */}
                     </Switch>
                 </div>

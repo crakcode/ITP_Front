@@ -17,6 +17,9 @@ export const getUserById = (ucode) =>
 export const deleteUser = (params) =>
   axios.delete(COMMENT_API_BASE_URL+ '/' + params.email);
 
+export const deleteCommmentById = (ucode,commentID) =>
+  axios.delete(COMMENT_API_BASE_URL+ '/comment/' + ucode+'/'+commentID);
+
 export const login = (params) =>
   axios.post(COMMENT_API_BASE_URL+"/login",params)
 

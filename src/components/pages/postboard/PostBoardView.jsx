@@ -1,4 +1,4 @@
-import { Paper, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
+import { Dialog, DialogActions, DialogContent, DialogTitle, Paper, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import {  deleteCommunity, getCommunityById } from '../../../lib/community';
 import React from 'react';
 import Button from '@material-ui/core/Button';
@@ -6,7 +6,8 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import { getPostById } from '../../../lib/post';
 import { getUserById } from '../../../lib/user';
-import { createComment,getComments} from '../../../lib/comment';
+import { createComment,getComments,deleteCommmentById} from '../../../lib/comment';
+import DeleteModal from './DeleteModal';
 
 class PostBoardView extends React.Component{
     constructor(props) {
@@ -15,7 +16,8 @@ class PostBoardView extends React.Component{
             id: this.props.match.params.id,
             content:'',
             post: {},
-            comments:[]
+            comments:[],
+            open: false
         }
     }
     componentDidMount=()=>{
@@ -33,14 +35,11 @@ class PostBoardView extends React.Component{
         console.log("회원정보",hel);
 
     }
-    handleDelete=async()=>{
-        const {id} =this.state;
-        let params={bcode:id}
-        await deleteCommunity(params);
-        this.props.history.push(`/community/list`);
-
+    handleDelete=async(row)=>{
+      const {data}=await deleteCommmentById(2,row.id);
+      data===false? alert("삭제할수없습니다.") : window.location.reload();
     }
-
+  
     Comment=async()=>{
       const {id} =this.state;
       let {data} =await getComments(id);
@@ -52,7 +51,7 @@ class PostBoardView extends React.Component{
       const {id} =this.state;
       let params={"content":this.state.content};
       console.log(id);
-      await createComment(id,1,params);
+      await createComment(id,2,params);
       window.location.reload();
   }
   handleChange = (e) => {
@@ -114,12 +113,13 @@ class PostBoardView extends React.Component{
               onChange={this.handleChange}
             />
                     <TableBody>
-
           {this.state.comments.map((row) => (
-            <TableRow key={row.id} onClick={()=>this.handleView(row)}>
+            <TableRow key={row.id} onClick={()=>this.handleDelete(row)}>
               <TableCell align="right">{row.title}</TableCell>
               <TableCell align="right">{row.content}</TableCell>
               <TableCell align="right">{row.writer}</TableCell>
+              <Button onClick={()=>this.handleDelete(row)}>삭제</Button>
+
             </TableRow>
           ))}
             </TableBody>

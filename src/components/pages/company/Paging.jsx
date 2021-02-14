@@ -5,7 +5,7 @@ import { getCompanyList } from '../../../lib/company';
 import { TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import "./styles.css";
 
-export default class Paging extends Component {
+export default class Pagination extends Component {
   constructor(props) {
       super(props);
       this.state = {
