@@ -14,6 +14,13 @@ export const getCompanyByDynamic = (params) =>{
   return axios.get(COMPANY_API_BASE_URL+"/search",params)
 }
 
+
+export const getComapanyPage = (index) =>
+  axios.get(COMPANY_API_BASE_URL+ '/page/' + index);
+
+export const getComapanyCountByList = (params) =>
+  axios.post(COMPANY_API_BASE_URL+ '/location', params);
+
 export const getCompanyByLocation = (location) =>
   axios.get(COMPANY_API_BASE_URL+ '/' + location);
 

@@ -9,7 +9,7 @@ import "./styles.css";
       super(props);
       this.state = {
           offset: 0,
-          perPage: 5,
+          perPage: 15,
           currentPage: 0,
           condition: 'location',
           keyword:'',

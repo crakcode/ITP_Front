@@ -1,7 +1,6 @@
 class PaginationApp extends React.Component {
     constructor() {
         super();
-
         // an example array of items to be paged
         var exampleItems = [...Array(20).keys()].map(i => ({ id: (i+1), name: 'Item ' + (i+1) }));
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate';
-import { getCompanyList } from '../../../lib/company';
+import { getComapanyPage, getCompanyList } from '../../../lib/company';
 import { TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import "./styles.css";
 
@@ -17,6 +17,9 @@ export default class Pagination extends Component {
   }
   handleList=async()=>{
     let {data}=await getCompanyList();
+    let a=await getComapanyPage(1);
+    console.log(a);
+
     const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
     const companyData = slice.map(row =>
         <TableBody>
