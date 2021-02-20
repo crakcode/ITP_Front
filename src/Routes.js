@@ -23,7 +23,6 @@ import CompanySearch from './components/pages/company/CompanySearch';
 import Dashboard from './components/pages/dashboard/Dashboard';
 import MyList from './components/pages/mypage/MyList';
 import Navigation from './components/pages/mypage/Navigation';
-import Page from './components/pages/company/Page';
 import PChart from './components/pages/community/chart';
 
 function Routes() {

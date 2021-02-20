@@ -1,4 +1,4 @@
-import { Paper, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
+import { Paper, TableBody, TableCell, TableRow, TextField, withStyles } from '@material-ui/core'
 import {  deleteCommunity, getCommunityById } from '../../../lib/community';
 import React from 'react';
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,24 @@ import { withRouter } from 'react-router-dom';
 import { getCompanyByName } from '../../../lib/company';
 import { createMyCompanyList } from '../../../lib/user';
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps'; // Marker 추가
+import NaverMap_Company from './NaverMap';
+import Grid from '@material-ui/core/Grid';
+import { createReview, getCompanyId ,getReviewByCompanyId} from '../../../lib/review';
+import { TransferWithinAStationSharp } from '@material-ui/icons';
+import InputMask from 'react-input-mask'
+
+const styles = {
+    paper: {
+        // width: `750px`,
+        // height: `580px`
+        textAlign: 'center',
+      },
+      list:{
+        minheight: `350px`
+      }
+
+    }  
+
 class CompanyView extends React.Component{
     constructor(props) {
         super(props)
@@ -14,18 +32,23 @@ class CompanyView extends React.Component{
             id: this.props.match.params.id,
             content:'',
             company:[],
+            reviews:[],
             latitude:0,
-            longitude:0
+            longitude:0,
+            score:0,
+            review:''
         }
-    }
-    componentDidMount=()=>{
         this.handleView();
+        this.handelReview();
     }
+    // componentDidMount=()=>{
+    //     this.handleView();
+    // }
     handleView=async()=>{
         const {data}=await getCompanyByName(this.state.id);
         this.setState({company:data[0]});
-        this.latitude=data[0].latitude;
-        this.longitude=data[0].longitude;
+        this.setState({longitude:data[0].longitude});
+        this.setState({latitude:data[0].latitude});
     }
 
     handleChange = (e) => {
@@ -38,9 +61,24 @@ class CompanyView extends React.Component{
         await createMyCompanyList(ucode,name);
     }
     
+    crateReview=async()=>{
+        const {id} =this.state;
+        let {data}=await getCompanyId(id);
+        let review={review:this.state.review,score:this.state.score};
+        await createReview(data,1,review);
+        window.location.reload();
+      }
 
+    handelReview=async()=>{
+        const {id} =this.state;
+        let company=await getCompanyId(id);
+        const {data}=await getReviewByCompanyId(company.data);
+        this.setState({reviews:data})
+      }
+  
     render(){
-
+        const { classes,state } = this.props;
+        const {longitude}=this.state.company;
         return(
     <div>
           <br/>
@@ -50,7 +88,11 @@ class CompanyView extends React.Component{
           <br/>
           <br/>
           <br/>
-            <Paper>
+          <Grid>
+
+    <Grid container spacing={3}>
+        <Grid item xs={6}>
+        <Paper className={classes.paper}>
                 회사명<br/>
                 {this.state.company.companyName}
                 <br/><br/><br/>
@@ -65,7 +107,7 @@ class CompanyView extends React.Component{
                 평점:
                 <br/><br/><br/>
 
-                  <Button
+            <Button
                 margin="normal"
                 required
                 variant="contained"
@@ -75,9 +117,70 @@ class CompanyView extends React.Component{
                 }}
               >
                   회사 추가하기
+            </Button>
+          </Paper>
+        </Grid>
+    
+        <Grid item xs={6}>
+          {/* <Paper className={classes.paper}><NaverMap_Company lng={this.state.company.longitude} lat={this.state.company.latitude} /></Paper> */}
+        </Grid>
+    
+        </Grid>
+        <Grid item xs={12}>
+        <Paper className={classes.list}>
+        <Button
+                margin="normal"
+                fullWidth
+                required
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  this.crateReview();
+                }}
+              >
+                  댓글달기
                   </Button>
-                  <NaverMap/>
-            </Paper>
+            <TextField
+              variant="standard"
+              margin="normal"
+              mask="9"
+              label="점수"
+              name="score"
+              onChange={this.handleChange}
+            >
+                <InputMask mask="5" maskChar=" " />
+            </TextField>
+
+            <TextField
+              variant="standard"
+              margin="normal"
+              label="내용"
+              required
+              name="review"
+              onChange={this.handleChange}
+            />
+
+
+        <TableBody>
+          {this.state.reviews.map((row) => (
+            <TableRow key={row.id} onClick={()=>this.handleDelete(row)}>
+              <TableCell align="right">{row.score}</TableCell>
+              <TableCell align="right">{row.review}</TableCell>
+              <TableCell align="right">{row.user.name}</TableCell>
+              <Button onClick={()=>this.handleDelete(row)}>삭제</Button>
+
+            </TableRow>
+          ))}
+            </TableBody>
+
+
+        </Paper>
+        </Grid>
+    
+
+    </Grid>
+
+
         </div>
         )
     }
@@ -89,4 +192,4 @@ class CompanyView extends React.Component{
 }
 
 
-export default withRouter (CompanyView);
+export default withRouter (withStyles(styles)(CompanyView));
