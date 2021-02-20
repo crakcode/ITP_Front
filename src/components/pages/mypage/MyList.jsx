@@ -1,11 +1,29 @@
-import { Button, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
+import { Button, TableBody, Paper,TableCell, TableRow,Table, TextField, withStyles } from '@material-ui/core'
 import { addCommunity, getCommunityById, getCommunitys } from '../../../lib/community';
 import React from 'react';
 import {deleteMyCompany, getCompanyByLocation, getCompanyCount} from '../../../lib/company';
 import ReactPaginate from 'react-paginate';
+import Grid from '@material-ui/core/Grid';
+
 import { getPostByUserId } from '../../../lib/post';
 import { getMyCompanyList } from '../../../lib/user';
-
+const styles = {
+    root: {
+        display: 'flex',
+      },
+        menuButton: {
+      marginRight: 'auto'
+    },
+    paper: {
+        // width: `750px`,
+        height: `350px`,
+        textAlign: 'center',
+      },  
+    table: {
+        minWidth: 650,
+      },
+    
+  };
 class MyList extends React.Component{
     constructor(props) {
         super(props);
@@ -50,16 +68,17 @@ class MyList extends React.Component{
     }
 
     render() {
-      
-        
+        const { classes } = this.props;
         return (
             <div>
                 <br/>
                 <br/>
                 <br/>
                 <br/>
-        <TableBody>
-            내가쓴글: Post 게시판
+        <Grid item xs={10}>
+          <Paper className={classes.paper}>내가쓴글
+          <Table className={classes.table} >
+            Post 게시판
           {this.state.post.map((row) => (
             <TableRow key={row.id} onClick={()=>this.goPostView(row)}>
             <TableCell component="th" scope="row">{row.id}</TableCell>
@@ -68,15 +87,23 @@ class MyList extends React.Component{
               <TableCell align="right">{row.createAt}</TableCell>
             </TableRow>
           ))}
-        </TableBody>
+        </Table>
+          </Paper>
+        </Grid>
+        <br/>
+        <Grid item xs={10}>
+          <Paper className={classes.paper}>
             내가 찜한 회사
             {this.state.companys.map((row) => (
             <TableRow key={row.companyId} >
-            <TableCell component="th" scope="row" >{row.companyId}</TableCell>
+            <TableCell component="th" scope="row" >{row.companyTel}</TableCell>
+            <TableCell component="th" scope="row" >{row.companyLocation}</TableCell>
             <TableCell component="th" scope="row"  onClick={()=>this.goCompanyView(row)}>{row.companyName}</TableCell>
             <Button component="th" color="secondary" className="btn btn-danger" scope="row" onClick={()=>this.deleteCompany(row)}>삭제하기</Button>
             </TableRow>
           ))}
+          </Paper>
+        </Grid>
 
             
             </div>
@@ -85,4 +112,4 @@ class MyList extends React.Component{
         )
       }
 }
-export default MyList;
+export default withStyles(styles)(MyList);

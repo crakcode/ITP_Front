@@ -6,23 +6,26 @@ import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import { getCompanyByName } from '../../../lib/company';
 import { createMyCompanyList } from '../../../lib/user';
-
+import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps'; // Marker 추가
 class CompanyView extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
             id: this.props.match.params.id,
             content:'',
-            company:[]
+            company:[],
+            latitude:0,
+            longitude:0
         }
     }
     componentDidMount=()=>{
-        console.log(this.state.id);
         this.handleView();
     }
     handleView=async()=>{
         const {data}=await getCompanyByName(this.state.id);
         this.setState({company:data[0]});
+        this.latitude=data[0].latitude;
+        this.longitude=data[0].longitude;
     }
 
     handleChange = (e) => {
@@ -33,11 +36,11 @@ class CompanyView extends React.Component{
         let name=this.state.id
         const ucode=1
         await createMyCompanyList(ucode,name);
-
     }
     
 
     render(){
+
         return(
     <div>
           <br/>
@@ -73,7 +76,7 @@ class CompanyView extends React.Component{
               >
                   회사 추가하기
                   </Button>
-
+                  <NaverMap/>
             </Paper>
         </div>
         )
