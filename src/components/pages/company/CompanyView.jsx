@@ -4,7 +4,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 // import SimpleModal from './SimpleModal';
 import { withRouter } from 'react-router-dom';
-import { getCompanyByName } from '../../../lib/company';
+import { getComapanyInfoFromBlind, getCompanyByName } from '../../../lib/company';
 import { createMyCompanyList } from '../../../lib/user';
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps'; // Marker 추가
 import NaverMap_Company from './NaverMap';
@@ -35,12 +35,14 @@ class CompanyView extends React.Component{
             latitude:0,
             longitude:0,
             score:0,
-            review:''
+            review:'',
+            description:''
         }
     }
     componentDidMount=()=>{ 
         this.handleView();
         this.handelReview();
+        this.handleDesc();
       }
     componentWillUnmount=()=>{
         window.location.reload();
@@ -51,6 +53,19 @@ class CompanyView extends React.Component{
         this.setState({longitude:data[0].longitude});
         this.setState({latitude:data[0].latitude});
     }
+    handleDesc=async()=>{
+        const {id}=this.state;
+        let {data}=await getComapanyInfoFromBlind(id);
+        console.log(data.length);
+        if(data.length!==0){
+            this.setState({description:data})
+        }
+        else{
+            this.setState({description:"데이터가 없습니다."})
+        }
+        console.log(this.state.description);
+    }
+
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -73,9 +88,6 @@ class CompanyView extends React.Component{
         const {id} =this.state;
         let company=await getCompanyId(id);
         console.log(company.data);
-        // const {data}=await getReviewByCompanyId(4);
-        // console.log(data);
-        // this.setState({reviews:data})
       }
   
     render(){
@@ -104,11 +116,9 @@ class CompanyView extends React.Component{
                 회사 전화번호<br/>
                 {this.state.company.companyTel}
                 <br/><br/><br/>
-                회사정보: 워드클라우드<br/>
-
-                평점:
-                <br/><br/><br/>
-
+                회사정보<br/>
+                {this.state.description}
+                <br/>
             <Button
                 margin="normal"
                 required

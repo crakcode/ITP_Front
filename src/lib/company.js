@@ -7,8 +7,13 @@ export const getCompanyList = () =>{
   return axios.get(COMPANY_API_BASE_URL+"/list");
 }
 
+export const getComapanyInfoFromBlind = (companyName) =>
+  axios.post("http://localhost:8080/api/v1/crawling/desc/"+ companyName);
+
+
 export const getCompanyCount = () =>
   axios.get(COMPANY_API_BASE_URL+'/count');
+
 
 export const getCompanyByDynamic = (params) =>{
   return axios.get(COMPANY_API_BASE_URL+"/search",params)

@@ -48,7 +48,7 @@ class MyList extends React.Component{
     }
 
     getPostByUcode=async()=>{
-        let {data} = await getPostByUserId(1);
+        let {data} = await getPostByUserId(2);
         this.setState({post:data.slice(0,4)});
     }
 
@@ -78,7 +78,6 @@ class MyList extends React.Component{
         <Grid item xs={10}>
           <Paper className={classes.paper}>내가쓴글
           <Table className={classes.table} >
-            Post 게시판
           {this.state.post.map((row) => (
             <TableRow key={row.id} onClick={()=>this.goPostView(row)}>
             <TableCell component="th" scope="row">{row.id}</TableCell>
@@ -95,10 +94,11 @@ class MyList extends React.Component{
           <Paper className={classes.paper}>
             내가 찜한 회사
             {this.state.companys.map((row) => (
-            <TableRow key={row.companyId} >
+            <TableRow key={row.companyId} 
+            onClick={()=>this.goCompanyView(row)} >
             <TableCell component="th" scope="row" >{row.companyTel}</TableCell>
             <TableCell component="th" scope="row" >{row.companyLocation}</TableCell>
-            <TableCell component="th" scope="row"  onClick={()=>this.goCompanyView(row)}>{row.companyName}</TableCell>
+            <TableCell component="th" scope="row"  >{row.companyName}</TableCell>
             <Button component="th" color="secondary" className="btn btn-danger" scope="row" onClick={()=>this.deleteCompany(row)}>삭제하기</Button>
             </TableRow>
           ))}
