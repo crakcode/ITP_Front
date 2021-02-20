@@ -40,7 +40,6 @@ class PostBoard extends React.Component{
         let {data}=await getPostList();
         this.setState({posts: data});
         console.log(data);
-
     }
 
 
