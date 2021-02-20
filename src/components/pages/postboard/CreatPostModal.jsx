@@ -10,15 +10,18 @@ import { withStyles } from '@material-ui/core/styles';
 import { updateCommunity } from '../../../lib/community';
 import { CreatePost } from '../../../lib/post';
 
+import { Paper} from '@material-ui/core'
 
 
-const styles = theme => ({
-
-    hidden: {
-    display: 'none'
-    }
-});
-
+const styles = {
+    paper: {
+        // width: `750px`,
+        height: `580px`,
+        textAlign: 'center',
+      },  
+    
+  };
+  
 class CreatPostModal extends React.Component {
     constructor(props) {
     super(props);
@@ -54,8 +57,7 @@ handleClickOpen() {
 }
 
 handleClose() {
-    this.setState({userName: '',birthday: '', gender: '', job: '', fileName: '',open: false
-})
+    this.setState({open: false})
 }
 
 
@@ -73,6 +75,9 @@ render() {
         <TextField label="타이틀" type="text" name="title" onChange={this.handleChange} /><br/>
         <TextField label="내용" type="text" name="content" onChange={this.handleChange} /><br/>
     </DialogContent>
+    <Paper>
+        sss
+    </Paper>
     <DialogActions>
         <Button variant="contained" color="primary" onClick={this.FormSubmit}>추가</Button>
         <Button variant="outlined" color="primary" onClick={this.handleClose}>닫기</Button>

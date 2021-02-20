@@ -11,7 +11,6 @@ import NaverMap_Company from './NaverMap';
 import Grid from '@material-ui/core/Grid';
 import { createReview, getCompanyId ,getReviewByCompanyId} from '../../../lib/review';
 import { TransferWithinAStationSharp } from '@material-ui/icons';
-import InputMask from 'react-input-mask'
 
 const styles = {
     paper: {
@@ -20,7 +19,7 @@ const styles = {
         textAlign: 'center',
       },
       list:{
-        minheight: `350px`
+        height: `350px`
       }
 
     }  
@@ -38,12 +37,14 @@ class CompanyView extends React.Component{
             score:0,
             review:''
         }
+    }
+    componentDidMount=()=>{ 
         this.handleView();
         this.handelReview();
-    }
-    // componentDidMount=()=>{
-    //     this.handleView();
-    // }
+      }
+    componentWillUnmount=()=>{
+        window.location.reload();
+    }  
     handleView=async()=>{
         const {data}=await getCompanyByName(this.state.id);
         this.setState({company:data[0]});
@@ -66,14 +67,15 @@ class CompanyView extends React.Component{
         let {data}=await getCompanyId(id);
         let review={review:this.state.review,score:this.state.score};
         await createReview(data,1,review);
-        window.location.reload();
       }
 
     handelReview=async()=>{
         const {id} =this.state;
         let company=await getCompanyId(id);
-        const {data}=await getReviewByCompanyId(company.data);
-        this.setState({reviews:data})
+        console.log(company.data);
+        // const {data}=await getReviewByCompanyId(4);
+        // console.log(data);
+        // this.setState({reviews:data})
       }
   
     render(){
@@ -122,7 +124,7 @@ class CompanyView extends React.Component{
         </Grid>
     
         <Grid item xs={6}>
-          {/* <Paper className={classes.paper}><NaverMap_Company lng={this.state.company.longitude} lat={this.state.company.latitude} /></Paper> */}
+          <Paper className={classes.paper}><NaverMap_Company data={this.state} /></Paper>
         </Grid>
     
         </Grid>
@@ -145,11 +147,10 @@ class CompanyView extends React.Component{
               margin="normal"
               mask="9"
               label="점수"
+              required
               name="score"
               onChange={this.handleChange}
-            >
-                <InputMask mask="5" maskChar=" " />
-            </TextField>
+            />
 
             <TextField
               variant="standard"

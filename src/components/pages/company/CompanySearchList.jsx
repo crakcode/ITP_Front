@@ -2,8 +2,31 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate';
 import { getCompanyByLocation, getCompanyByName, getCompanyList } from '../../../lib/company';
-import { Button, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
+import { Grid,Paper,Button, TableBody, TableCell, TableRow, TextField } from '@material-ui/core'
 import "./styles.css";
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
+
+
+const styles = {
+  paper: {
+      width: `750px`,
+      textAlign: 'center',
+    },
+
+  formControl: {
+      minWidth: 120,
+    },
+    searchControl:{
+      width:400
+    }
+  
+  
+};
+
  class CompanySearchList extends Component {
   constructor(props) {
       super(props);
@@ -112,27 +135,38 @@ import "./styles.css";
       this.handleList()
   }
   render() {
+    const { classes } = this.props;
+
       return (
           <div>
               <br/>
               <br/>
               <br/>
-              <form onSubmit={this.handleSubmit}>
-          <label>
-            검색조건
-            <select value={this.state.condition} onChange={this.handleCondition}>
-              <option value="location">지역</option>
-              <option value="name">상호명</option>
-            </select>
+
+
+
+  <form onSubmit={this.handleSubmit}>
+    <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">검색조건</InputLabel>
+        <Select value={this.state.condition} onChange={this.handleCondition}
+          label="Age"
+        >
+          {/* <MenuItem value="">
+            <em>None</em>
+          </MenuItem> */}
+          <MenuItem value="location">지역</MenuItem>
+          <MenuItem value="name">회사명</MenuItem>
+        </Select>
+      </FormControl>
             <TextField
                 variant="standard"
                 margin="normal"
+                className={classes.searchControl}
                 required
                 name="text"
                 onChange={this.handleKeyword}
               />
 
-          </label>
           <Button
                 margin="normal"
                 required
@@ -143,10 +177,12 @@ import "./styles.css";
                 }}
               >
                 검색
-          </Button> 
+          </Button>
+
+
 
         </form>
-
+        <Paper className={classes.paper} >
             {this.state.companyData}
               <ReactPaginate
                   previousLabel={"이전"}
@@ -160,11 +196,11 @@ import "./styles.css";
                   containerClassName={"pagination"}
                   subContainerClassName={"pages pagination"}
                   activeClassName={"active"}/>
-
+          </Paper>
           </div>
 
       )
   }
 }
 
-export default CompanySearchList;
+export default withStyles(styles)(CompanySearchList);
