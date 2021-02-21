@@ -8,8 +8,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink, Router } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ForumIcon from '@material-ui/icons/Forum';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import BusinessIcon from '@material-ui/icons/Business';
+import PersonIcon from '@material-ui/icons/Person';
 const drawerWidth = 240;
-
 const styles = {
     root: {
         display: 'flex',
@@ -18,7 +22,7 @@ const styles = {
       marginRight: 'auto'
     },
     appBar: {
-        width: `calc(100% - ${115}px)`,
+        width: `calc(100% - ${140}px)`,
         marginLeft: drawerWidth,
       },  
     drawer: {
@@ -56,26 +60,31 @@ class Appshell extends React.Component {
                 <br/>
                 <MenuItem onClick={this.handleDrawerToggle}>
                     <Link component={RouterLink} to="/dashboard">
+                    <DashboardIcon/>
                         Dashboard
                     </Link>
                 </MenuItem>
                 <MenuItem onClick={this.handleDrawerToggle}>
                     <Link component={RouterLink} to="/post">
-                        Post
-                    </Link>
-                </MenuItem>
-                <MenuItem onClick={this.handleDrawerToggle}>
-                    <Link component={RouterLink} to="/community">
+                    <ForumIcon/>
                         Community
                     </Link>
                 </MenuItem>
                 <MenuItem onClick={this.handleDrawerToggle}>
+                    <Link component={RouterLink} to="/notification">
+                    <NotificationsIcon/>
+                        Notification
+                    </Link>
+                </MenuItem>
+                <MenuItem onClick={this.handleDrawerToggle}>
                     <Link component={RouterLink} to="/company">
+                    <BusinessIcon/>
                         Company
                     </Link>
                 </MenuItem>
                 <MenuItem onClick={this.handleDrawerToggle}>
                     <Link component={RouterLink} to="/mypage">
+                    <PersonIcon/>
                         MyPage
                     </Link>
                 </MenuItem>

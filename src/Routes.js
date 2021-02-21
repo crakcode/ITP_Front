@@ -42,8 +42,8 @@ function Routes() {
                           <Route path = "/view-employee/:id" component = {ViewEmployeeComponent}></Route>
                           <Route path = "/update-employee/:id" component = {UpdateEmployeeComponent}></Route>
                           <Route path = "/helloworld" component = {helloworld}></Route>
-                          <Route path = "/community" exact component = {CommunityList}></Route>
-                          <Route path = "/community/:id" exact component = {CommunityView}></Route>
+                          <Route path = "/notification" exact component = {CommunityList}></Route>
+                          <Route path = "/notification/:id" exact component = {CommunityView}></Route>
                           <Route path = "/createaccount/:id" component = {CreateAccount}></Route>
                           <Route path = "/company" exact component = {CompanySearchList}></Route>
                           <Route path = "/company/:id" exact component = {CompanyView}></Route>

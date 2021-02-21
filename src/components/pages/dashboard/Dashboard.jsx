@@ -30,7 +30,6 @@ const styles = {
       textAlign: 'center',
     },  
     post: {
-      height: `320px`,
       textAlign: 'center',
     },  
     notification: {
@@ -56,7 +55,21 @@ class Dashboard extends React.Component{
     }
     componentDidMount() {
         this.getCompanyCount();
+        this.doLocationDefualt();
         this.handleList();
+    }
+    doLocationDefualt=async()=>{
+      let data2=[];
+      const {data} =await getCompanyByLocation("서울");
+      if (data.length<5){
+        this.setState({companys:data});
+    }
+    else{
+        for(let i=0;i<6;i++){
+            data2.push(data[i])
+        }
+        this.setState({companys:data2});
+    }
     }
 
     clickLocationButton=async(location)=>{
